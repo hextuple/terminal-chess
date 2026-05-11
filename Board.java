@@ -18,9 +18,6 @@ public class Board {
   }
 
   private void initializeBoard() {
-       Java
-
-  private void initializeBoard() {
     // Initialize Black Pieces
     grid[0][0] = new Rook(Color.BLACK);
     grid[0][1] = new Knight(Color.BLACK);
@@ -35,7 +32,7 @@ public class Board {
       grid[1][i] = new Pawn(Color.BLACK);
     }
 
-    // Initialize White Pieces 
+    // Initialize White Pieces
     for (int i = 0; i < 8; i++) {
       grid[6][i] = new Pawn(Color.WHITE);
     }
@@ -48,5 +45,45 @@ public class Board {
     grid[7][5] = new Bishop(Color.WHITE);
     grid[7][6] = new Knight(Color.WHITE);
     grid[7][7] = new Rook(Color.WHITE);
+  }
+
+  public void printBoard() {
+    System.out.println("\n  a b c d e f g h");
+    for (int r = 0; r < 8; r++) {
+      System.out.print((8 - r) + " "); // Print row number on the left
+      for (int c = 0; c < 8; c++) {
+        Piece p = grid[r][c];
+        if (p == null) {
+          System.out.print(". ");
+        } else {
+          System.out.print(getPieceSymbol(p) + " ");
+        }
+      }
+      System.out.print((8 - r)); // Print row number on the right
+      System.out.println();
+    }
+    System.out.println("  a b c d e f g h\n");
+  }
+
+  private String getPieceSymbol(Piece p) {
+    String symbol = "?";
+    if (p instanceof King)
+      symbol = "k";
+    else if (p instanceof Queen)
+      symbol = "q";
+    else if (p instanceof Rook)
+      symbol = "r";
+    else if (p instanceof Bishop)
+      symbol = "b";
+    else if (p instanceof Knight)
+      symbol = "n";
+    else if (p instanceof Pawn)
+      symbol = "p";
+
+    // Uppercase for White, Lowercase for Black
+    if (p.getColor() == Color.WHITE) {
+      return symbol.toUpperCase();
+    }
+    return symbol;
   }
 }
